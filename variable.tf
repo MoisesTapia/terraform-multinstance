@@ -12,7 +12,11 @@ variable "aws_intatype" {
     description = ""
 }
 
-variable "server_names" {
+variable "public_server_names" {
+    type        = list(string)
+}
+
+variable "private_server_names" {
     type        = list(string)
 }
 
@@ -20,34 +24,24 @@ variable "server_names" {
 # Security Groups
 
 
-variable "aws_sec1_ingress" {
+variable "aws_public_sec_ingress" {
     description = ""
     type = list(number)
 }
 
-variable "aws_sec1_egress" {
+variable "aws_public_sec_egress" {
     description = ""
     type = list(number)
 }
 
-variable "aws_sec2_ingress" {
+variable "aws_privat_sec_ingress" {
     description = ""
     type = list(number)
 }
 
-variable "aws_sec2_egress" {
+variable "aws_privat_sec_egress" {
     description = ""
     type = list(number)
-}
-
-variable "aws_sec3_ingress" {
-    description = ""
-    type = number
-}
-
-variable "aws_sec3_egress" {
-    description = ""
-    type = number
 }
 
 variable "protocol_net"{
@@ -56,7 +50,12 @@ variable "protocol_net"{
 }
 
 # Asig Security Group
-variable "sec_groups" {
+variable "public_sec_groups" {
+    type        = list(string)
+    description = ""
+}
+
+variable "privat_sec_groups" {
     type        = list(string)
     description = ""
 }
@@ -64,4 +63,14 @@ variable "sec_groups" {
 variable "sg_names" {
     type        = list(string)
     description = ""
+}
+
+# Networking
+
+variable "public_networking" {
+    type    = string
+}
+
+variable "public_networking" {
+    type    = string
 }
