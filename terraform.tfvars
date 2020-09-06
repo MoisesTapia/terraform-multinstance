@@ -1,0 +1,13 @@
+aws_region          = "us-east-2"
+aws_ami             = "ami-0bbe28eb2173f6167"
+aws_intatype        = "t2.micro"
+server_names        = ["Server1","Server2","Server3"]
+sg_names            = ["sg_server1", "sg_server2","sg_server3"]
+protocol_net        = "tcp"
+aws_sec1_ingress    = [22,80,443,445,444,8080]
+aws_sec1_egress     = [22,80,443,445,444,8080]
+aws_sec2_ingress    = [3306,22]
+aws_sec2_egress     = [3306,22]
+aws_sec3_ingress    = 22
+aws_sec3_egress     = 22
+sec_groups          = [ "sg_server1", "sg_server2","sg_server3"]
