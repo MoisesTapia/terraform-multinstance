@@ -1,5 +1,5 @@
 resource "aws_vpc" "public_net" {
-    
+
     cidr_block              = var.public_networking
 
     tags = {
@@ -25,6 +25,7 @@ resource "aws_subnet" "public_subnet" {
     tags = {
       Name                  = var.aws_subnet_name[0]
     }
+    depends_on = [aws_vpc.public_net]
 }
 
 resource "aws_subnet" "private_subnet" {
@@ -36,4 +37,5 @@ resource "aws_subnet" "private_subnet" {
     tags = {
       Name                  = var.aws_subnet_name[1]
     }
+    depends_on = [aws_vpc.private_net]
 }
