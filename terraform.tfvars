@@ -22,3 +22,4 @@ public_networking      = "10.0.0.0/16"
 private_networking     = "10.0.0.0/16"
 aws_subnet_name        = ["public_subnet", "private_subnet"]
 aws_vpc_name           = ["public_vpc", "private_vpc"]
+aws_cidrblocks         = ["10.0.1.0/24","10.0.2.0/24"]

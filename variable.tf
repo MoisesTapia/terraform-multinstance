@@ -91,6 +91,3 @@ variable "aws_cidrblocks" {
   type        = list(string)
   description = ""
 }
-variable "public_subnet" {}
-
-variable "private_subnet" {}
