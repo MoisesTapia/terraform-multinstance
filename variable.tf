@@ -1,23 +1,23 @@
 variable "aws_region" {
-    type    = string
+  type = string
 }
 
 variable "aws_ami" {
-    type    = string
-    description = "This var set the ami in the instances"
+  type        = string
+  description = "This var set the ami in the instances"
 }
 
 variable "aws_intatype" {
-    type        = string
-    description = ""
+  type        = string
+  description = ""
 }
 
 variable "public_server_names" {
-    type        = list(string)
+  type = list(string)
 }
 
 variable "private_server_names" {
-    type        = list(string)
+  type = list(string)
 }
 
 
@@ -25,52 +25,72 @@ variable "private_server_names" {
 
 
 variable "aws_public_sec_ingress" {
-    description = ""
-    type = list(number)
+  description = ""
+  type        = list(number)
 }
 
 variable "aws_public_sec_egress" {
-    description = ""
-    type = list(number)
+  description = ""
+  type        = list(number)
 }
 
 variable "aws_privat_sec_ingress" {
-    description = ""
-    type = list(number)
+  description = ""
+  type        = list(number)
 }
 
 variable "aws_privat_sec_egress" {
-    description = ""
-    type = list(number)
+  description = ""
+  type        = list(number)
 }
 
-variable "protocol_net"{
-    description = ""
-    type = string
+variable "protocol_net" {
+  description = ""
+  type        = string
 }
 
 # Asig Security Group
 variable "public_sec_groups" {
-    type        = list(string)
-    description = ""
+  type        = list(string)
+  description = ""
 }
 
-variable "privat_sec_groups" {
-    type        = list(string)
-    description = ""
+variable "private_sec_groups" {
+  type        = list(string)
+  description = ""
 }
 
 variable "sg_names" {
-    type        = list(string)
-    description = ""
+  type        = list(string)
+  description = ""
 }
 
 # Networking
 
 variable "public_networking" {
-    type    = string
+  type        = string
+  description = "Public VPC"
 }
 
-variable "public_networking" {
-    type    = string
+variable "private_networking" {
+  type        = string
+  description = "Private VPC"
 }
+
+variable "aws_subnet_name" {
+  type        = list(string)
+  description = ""
+}
+
+variable "aws_vpc_name" {
+  type        = list(string)
+  description = ""
+}
+
+variable "aws_cidrblocks" {
+  type        = list(string)
+  description = ""
+}
+variable "public_subnet" {}
+
+variable "private_subnet" {}
