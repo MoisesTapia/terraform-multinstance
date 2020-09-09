@@ -1,9 +1,13 @@
 resource "aws_vpc" "public_net" {
 
     cidr_block              = var.public_networking
+    instance_tenancy        = var.instance_tenancy
+    enable_dns_hostnames    = var.enable_dns_hostnames
+    enable_dns_support      = var.enable_dns_support
+    enable_classiclink      = var.enable_classiclink
 
     tags = {
-      Name                  = "public_net"
+      Name                  = var.aws_tags_network[0]
     }
 }
 
@@ -12,7 +16,15 @@ resource "aws_vpc" "private_net" {
     cidr_block              = var.private_networking
 
     tags = {
-    Name                    = "private_net"
+    Name                    = var.aws_tags_network[1]
+  }
+}
+
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.public_net.id
+
+  tags = {
+    Name = var.aws_tags_network[2]
   }
 }
 
@@ -23,7 +35,7 @@ resource "aws_subnet" "public_subnet" {
     cidr_block              = var.aws_cidrblocks[0]
 
     tags = {
-      Name                  = var.aws_subnet_name[0]
+      Name                  = var.aws_tags_network[3]
     }
     depends_on = [aws_vpc.public_net]
 }
@@ -35,7 +47,25 @@ resource "aws_subnet" "private_subnet" {
     cidr_block              = var.aws_cidrblocks[1]
 
     tags = {
-      Name                  = var.aws_subnet_name[1]
+      Name                  = var.aws_tags_network[4]
     }
     depends_on = [aws_vpc.private_net]
+}
+
+resource "aws_route_table" "route_public" {
+  vpc_id = aws_vpc.public_net.id
+
+  route {
+    cidr_block = "10.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+
+  tags = {
+    Name = var.aws_tags_network[5]
+  }
+}
+
+resource "aws_route_table_association" "public_subnet_rta" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.route_public.id
 }
