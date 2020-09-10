@@ -28,7 +28,7 @@ resource "aws_security_group" "public_sg_server" {
   tags = {
     "Name" = "public_sg_server"
   }
-  #depends_on = [aws_instance.public_servers]
+  depends_on = [aws_vpc.public_net]
 
 }
 
@@ -63,6 +63,6 @@ resource "aws_security_group" "private_sg_server" {
     "Name" = "private_sg_server"
   }
 
-  #depends_on = [aws_instance.private_servers]
+  depends_on = [aws_vpc.private_net]
 
 }

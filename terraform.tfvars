@@ -43,5 +43,6 @@ aws_tags_network       = [
     "internet-gateway",
     "public_subnet",
     "private_subnet",
-    "public-route-table"
+    "public-route-table",
+    "private-route-table"
 ]

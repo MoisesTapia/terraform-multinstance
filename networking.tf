@@ -26,12 +26,14 @@ resource "aws_internet_gateway" "gw" {
   tags = {
     Name = var.aws_tags_network[2]
   }
+
+  depends_on = [aws_vpc.public_net]
 }
 
 resource "aws_subnet" "public_subnet" {
     availability_zone       = data.aws_availability_zones.available.names[0]
     vpc_id                  = aws_vpc.public_net.id
-    map_public_ip_on_launch = false
+    map_public_ip_on_launch = true
     cidr_block              = var.aws_cidrblocks[0]
 
     tags = {
@@ -56,7 +58,7 @@ resource "aws_route_table" "route_public" {
   vpc_id = aws_vpc.public_net.id
 
   route {
-    cidr_block = "10.0.0.0/0"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
   }
 
@@ -68,4 +70,20 @@ resource "aws_route_table" "route_public" {
 resource "aws_route_table_association" "public_subnet_rta" {
   subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.route_public.id
+
+  depends_on = [aws_route_table.route_public]
+}
+
+
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.private_net.id
+
+  tags = {
+    Name = var.aws_tags_network[6]
+  }
+}
+
+resource "aws_route_table_association" "private_1" {
+  subnet_id      = aws_subnet.private_subnet.id
+  route_table_id = aws_route_table.private.id
 }
